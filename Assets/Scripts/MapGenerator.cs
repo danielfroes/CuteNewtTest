@@ -1,61 +1,59 @@
-
+using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
 
-public class MapGenerator : MonoBehaviour
+namespace CuteNewtTest.MapGeneration
 {
-    public Tilemap groundTilemap;
-    public Tilemap grassTilemap;
-    public TileBase groundTile; // Array dos diferentes tipos de tiles
-    public TileBase grassTile;
-
-    public int width = 50; // Largura do mapa
-    public int height = 50; // Altura do mapa
-    public float scale = 5f; // Escala do ruído
-
-    void Start()    
+    public class MapGenerator : MonoBehaviour
     {
-        GenerateMap();
-    }
+        [SerializeField] Transform _tilemapParent;
+        [Expandable, SerializeField] List<MapLayerData> _layersSettings = new();
+        [SerializeField] MapSize _size;
 
-    void GenerateMap()
-    {
-        for (int x = 0; x < width; x++)
+        List<AMapLayer> _layers = new();
+
+        [Button()]
+        void GenerateMap()
         {
-            for (int y = 0; y < height; y++)
+            ClearMap();
+            GenerateLayers();
+        }
+
+        void GenerateLayers()
+        {
+            foreach (MapLayerData layerData in _layersSettings)
             {
-                float xCoord = (float)x / width * scale;
-                float yCoord = (float)y / height * scale;
+                if (!layerData.Active)
+                    continue;
 
-                float sample = Mathf.PerlinNoise(xCoord, yCoord);
-
-                // Determinar o tipo de tile baseado na amostra do ruído
-                DetermineTile(sample, x, y);
+                AMapLayer mapLayer = CreateMapLayer(layerData);
+                mapLayer.GenerateMap();
+                _layers.Add(mapLayer);
             }
         }
-    }
 
-    void DetermineTile(float value, int x, int y)
-    {
-
-        int tileMapX = x - width / 2;
-        int tileMapY = y - height / 2;
-        // Lógica para determinar qual tile usar com base no valor do ruído
-        // Aqui você pode definir diferentes intervalos para diferentes tipos de terreno
-        // Por exemplo: 0.0 a 0.3 para grama, 0.3 a 0.6 para água, etc.
-
-        // Por enquanto, vamos simplesmente alternar entre dois tipos de terreno
-        if (value < 0.6f)
+        void ClearMap()
         {
-            grassTilemap.SetTile(new Vector3Int(tileMapX, tileMapY, 0), grassTile); 
+            _layers.ForEach(layer => layer?.Dispose());
+            _layers.Clear();
 
+            for (int i = _tilemapParent.childCount - 1; i >= 0; i--)
+            {
+                GameObject child = _tilemapParent.GetChild(i).gameObject;
+                DestroyImmediate(child);
+            }
         }
-        else
+
+        AMapLayer CreateMapLayer(MapLayerData data)
         {
-            groundTilemap.SetTile(new Vector3Int(tileMapX, tileMapY, 0), groundTile); 
-            
+            return (data.UseCellularAutomaton, data.UseCascade) switch
+            {
+                (true, false) => new CellularAutomatonLayer(data, _tilemapParent, _size),
+                (true, true) => new CascadeMapLayer(data, _tilemapParent, _size),
+                _ => new CompleteLayer(data, _tilemapParent, _size)
+            }; ;
         }
     }
 }
+
 

@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 3341574943
+    locked: 0
+  - name: Grass
+    uniqueID: 19454827
+    locked: 0
+  - name: Cliff
+    uniqueID: 1841499099
+    locked: 0
