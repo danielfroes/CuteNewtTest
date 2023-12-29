@@ -19,12 +19,12 @@ MonoBehaviour:
   _useCellularAutomaton: 1
   _cellularAutomatonSettings:
     _deathLimit: 2
-    _birthLimit: 5
+    _birthLimit: 4
     _trimLimit: 3
-    _randomGeneratorChance: 44
+    _randomGeneratorChance: 28
     _fillHoles: 1
     _fillLimit: 4
   _useCascade: 1
   _cascadeSettings:
     _cascadeTile: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
-    _height: 1
+    _height: 2

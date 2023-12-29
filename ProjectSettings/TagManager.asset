@@ -50,3 +50,6 @@ TagManager:
   - name: Cliff
     uniqueID: 1841499099
     locked: 0
+  - name: Cliff 2
+    uniqueID: 2512299923
+    locked: 0

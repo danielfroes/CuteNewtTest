@@ -9,7 +9,7 @@ namespace CuteNewtTest.MapGeneration
     {
         CellularAutomatonSettings _settings;
 
-        public CellularAutomatonLayer(MapLayerData data, Transform tilemapParent, MapSize mapSize) : base(data, tilemapParent, mapSize)
+        public CellularAutomatonLayer(MapLayerData data, MapSize mapSize, AMapLayer baseLayer) : base(data, mapSize, baseLayer)
         {
             _settings = data.CellularAutomatonSettings;
         }
@@ -29,10 +29,17 @@ namespace CuteNewtTest.MapGeneration
             {
                 if (CheckForChanceToGenerate())
                 {
-                    Tilemap.SetTile(position, Data.Tile);
+                    CreateMainTile(position);
                 }
             });
+        }
 
+        void CreateMainTile(Vector3Int position)
+        {
+            if (BaseLayer == null || (BaseLayer.IsMainTile(position) && BaseLayer.GetTileCountInNeighbours(position) == 8))
+            {
+                Tilemap.SetTile(position, Data.Tile);
+            }
         }
 
         void ExecuteCellularAutomaton()
@@ -43,7 +50,7 @@ namespace CuteNewtTest.MapGeneration
 
                 if (neigboursCount >= _settings.BirthLimit)
                 {
-                    Tilemap.SetTile(position, Data.Tile);
+                    CreateMainTile(position);
                 }
                 else if (neigboursCount <= _settings.DeathLimit)
                 {
@@ -59,13 +66,9 @@ namespace CuteNewtTest.MapGeneration
             while (clearCount != 0)
             {
                 clearCount = 0;
-
                 MapSize.ForEachPosition(position =>
                 {
-                    if(TryTrimTile(position))
-                    {
-                        clearCount++;
-                    }
+                    clearCount += TryTrimTile(position) ? 1 : 0;
                 });
             }
         }
@@ -104,23 +107,7 @@ namespace CuteNewtTest.MapGeneration
             return vertical || horizontal || diagonal || invertedDiagonal;
         }
 
-        protected int GetTileCountInNeighbours(Vector3Int position)
-        {
-            int count = 0;
-
-            for (int x = position.x - 1; x <= position.x + 1; x++)
-            {
-                for (int y = position.y - 1; y <= position.y + 1; y++)
-                {
-                    Vector3Int neighbourPosition = new(x, y);
-
-                    if (neighbourPosition != position && IsMainTile(neighbourPosition))
-                        count++;
-                }
-            }
-
-            return count;
-        }
+        
 
         void FillHoles()
         {
@@ -133,20 +120,9 @@ namespace CuteNewtTest.MapGeneration
 
                 if (neighbours >= _settings.FillLimit)
                 {
-                    Tilemap.SetTile(position, Data.Tile);
+                    CreateMainTile(position);
                 }
             });
-        }
-
-
-        bool IsMainTile(Vector3Int position)
-        {
-            return Tilemap.GetTile(position) == Data.Tile;
-        }
-
-        protected bool IsTileEmpty(Vector3Int position)
-        {
-            return Tilemap.GetTile(position) == null;
         }
 
         bool CheckForChanceToGenerate()

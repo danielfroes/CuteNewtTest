@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
+  m_Name: CliffGrassLayer
+  m_EditorClassIdentifier: 
+  _active: 1
+  _tile: {fileID: 11400000, guid: ccb578eafd0362d43a96039d76177bbb, type: 2}
+  _layerId: 1841499099
+  _orderInLayer: 1
+  _useCellularAutomaton: 1
+  _cellularAutomatonSettings:
+    _deathLimit: 2
+    _birthLimit: 5
+    _trimLimit: 3
+    _randomGeneratorChance: 50
+    _fillHoles: 1
+    _fillLimit: 3
+  _useCascade: 0
+  _cascadeSettings:
+    _cascadeTile: {fileID: 0}
+    _height: 0

@@ -7,7 +7,7 @@ namespace CuteNewtTest.MapGeneration
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] Transform _tilemapParent;
-        [Expandable, SerializeField] List<MapLayerData> _layersSettings = new();
+        [SerializeField] List<HeightLevelData> _heightLevels = new();
         [SerializeField] MapSize _size;
 
         List<AMapLayer> _layers = new();
@@ -21,15 +21,30 @@ namespace CuteNewtTest.MapGeneration
 
         void GenerateLayers()
         {
-            foreach (MapLayerData layerData in _layersSettings)
+            AMapLayer currentBase = null;
+            int sortingOrder = 0;
+            foreach (HeightLevelData heightLevel in _heightLevels)
             {
-                if (!layerData.Active)
-                    continue;
-
-                AMapLayer mapLayer = CreateMapLayer(layerData);
-                mapLayer.GenerateMap();
-                _layers.Add(mapLayer);
+                currentBase = GenerateMap(heightLevel.BaseLayer, currentBase, sortingOrder);
+                sortingOrder++;
+                foreach (MapLayerData layerData in heightLevel.DetailsLayers)
+                {
+                    GenerateMap(layerData, currentBase, sortingOrder);
+                    sortingOrder++;
+                }
             }
+        }
+
+        AMapLayer GenerateMap(MapLayerData mapLayerData, AMapLayer baseLayer, int sortingOrder)
+        {
+            if (!mapLayerData.Active)
+                return null;
+            
+            AMapLayer mapLayer = CreateMapLayer(mapLayerData, baseLayer);
+            mapLayer.CreateTilemap(_tilemapParent, sortingOrder);
+            mapLayer.GenerateMap();
+            _layers.Add(mapLayer);
+            return mapLayer;
         }
 
         void ClearMap()
@@ -44,13 +59,13 @@ namespace CuteNewtTest.MapGeneration
             }
         }
 
-        AMapLayer CreateMapLayer(MapLayerData data)
+        AMapLayer CreateMapLayer(MapLayerData mapLayerData, AMapLayer baseLayer)
         {
-            return (data.UseCellularAutomaton, data.UseCascade) switch
+            return (mapLayerData.UseCellularAutomaton, mapLayerData.UseCascade) switch
             {
-                (true, false) => new CellularAutomatonLayer(data, _tilemapParent, _size),
-                (true, true) => new CascadeMapLayer(data, _tilemapParent, _size),
-                _ => new CompleteLayer(data, _tilemapParent, _size)
+                (true, false) => new CellularAutomatonLayer(mapLayerData, _size, baseLayer),
+                (true, true) => new CascadeMapLayer(mapLayerData,  _size, baseLayer),
+                _ => new CompleteLayer(mapLayerData, _size, baseLayer)
             }; ;
         }
     }

@@ -6,7 +6,7 @@ namespace CuteNewtTest.MapGeneration
     public class CascadeMapLayer : CellularAutomatonLayer
     {
         CascadeSettings _settings;
-        public CascadeMapLayer(MapLayerData data, Transform tilemapParent, MapSize mapSize) : base(data, tilemapParent, mapSize)
+        public CascadeMapLayer(MapLayerData data,MapSize mapSize, AMapLayer baseLayer) : base(data, mapSize, baseLayer)
         {
              _settings = data.CascadeSettings;
         }

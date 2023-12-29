@@ -4,7 +4,7 @@ namespace CuteNewtTest.MapGeneration
 {
     public class CompleteLayer : AMapLayer
     {
-        public CompleteLayer(MapLayerData data, Transform tilemapParent, MapSize mapSize) : base(data, tilemapParent, mapSize)
+        public CompleteLayer(MapLayerData data, MapSize mapSize, AMapLayer baseLayer) : base(data, mapSize, baseLayer)
         {
         }
 
