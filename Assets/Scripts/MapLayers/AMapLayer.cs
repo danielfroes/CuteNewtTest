@@ -1,61 +1,34 @@
-﻿using System;
+﻿using UnityEngine.Tilemaps;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using System;
 
 namespace CuteNewtTest.MapGeneration
 {
     public abstract class AMapLayer : IDisposable
     {
-        protected MapLayerData Data { get; }
-        protected Tilemap Tilemap { get; private set; }
-        protected MapSize MapSize { get; }
-        protected AMapLayer BaseLayer { get; }
+        public Tilemap Tilemap { get; protected set; }
+        public MapSize MapSize { get; }
+        public TerrainLayer BaseLayer { get; }
+        
+        protected abstract TileBase MainTile { get; }
+        protected abstract string TilemapName { get; } 
 
-        public AMapLayer(MapLayerData data, MapSize mapSize, AMapLayer baseLayer)
+        public AMapLayer(MapSize mapSize, TerrainLayer baseLayer)
         {
-            Data = data;
             MapSize = mapSize;
             BaseLayer = baseLayer;
         }
 
-        public abstract void GenerateMap();
+        public abstract void Generate(Transform tilemapParent, int sortingOrder);
 
-        public void CreateTilemap(Transform tilemapParent, int sortingOrder)
+        protected Tilemap CreateTilemap(Transform tilemapParent, int sortingOrder)
         {
-            TilemapRenderer renderer = new GameObject(Data.Tile.name, typeof(TilemapRenderer)).GetComponent<TilemapRenderer>();
+            TilemapRenderer renderer = new GameObject(TilemapName, typeof(TilemapRenderer)).GetComponent<TilemapRenderer>();
             renderer.transform.parent = tilemapParent;
-            //renderer.sortingLayerID = Data.LayerId;
             renderer.sortingOrder = sortingOrder;
-            Tilemap = renderer.GetComponent<Tilemap>();
-        }
-
-
-        public bool IsMainTile(Vector3Int position)
-        {
-            return Tilemap.GetTile(position) == Data.Tile;
-        }
-
-        public bool IsTileEmpty(Vector3Int position)
-        {
-            return Tilemap.GetTile(position) == null;
-        }
-
-        public int GetTileCountInNeighbours(Vector3Int position)
-        {
-            int count = 0;
-
-            for (int x = position.x - 1; x <= position.x + 1; x++)
-            {
-                for (int y = position.y - 1; y <= position.y + 1; y++)
-                {
-                    Vector3Int neighbourPosition = new(x, y);
-
-                    if (neighbourPosition != position && IsMainTile(neighbourPosition))
-                        count++;
-                }
-            }
-
-            return count;
+            renderer.mode = TilemapRenderer.Mode.Individual;
+            renderer.sortOrder = TilemapRenderer.SortOrder.TopLeft;
+            return renderer.GetComponent<Tilemap>();
         }
 
         public void Clear()
@@ -69,5 +42,72 @@ namespace CuteNewtTest.MapGeneration
 
             if (Tilemap) UnityEngine.Object.DestroyImmediate(Tilemap.gameObject);
         }
+
+
+        #region Helper Functions
+
+        public bool IsMainTile(Vector3Int position)
+        {
+            return Tilemap.GetTile(position) == MainTile;
+        }
+
+        public bool IsTileEmpty(Vector3Int position)
+        {
+            return Tilemap.GetTile(position) == null;
+        }
+
+
+        public int GetTileCountInNeighbours(Vector3Int position) => GetTileCountInNeighbours(position, Vector2Int.one);
+
+        public int GetTileCountInNeighbours(Vector3Int position, Vector2Int offset)
+        {
+            int count = 0;
+
+            for (int x = position.x - offset.x; x <= position.x + offset.x; x++)
+            {
+                for (int y = position.y - offset.y; y <= position.y + offset.y; y++)
+                {
+                    Vector3Int neighbourPosition = new(x, y);
+
+                    if (neighbourPosition != position && IsMainTile(neighbourPosition))
+                        count++;
+                }
+            }
+
+            return count;
+        }
+
+        public virtual void CreateMainTile(Vector3Int position)
+        {
+            if (!CheckBaseLayer(position))
+                return;
+
+            Tilemap.SetTile(position, MainTile);
+        }
+
+        bool CheckBaseLayer(Vector3Int position)
+        {
+            return BaseLayer == null || (BaseLayer.IsMainTile(position) && BaseLayer.GetTileCountInNeighbours(position) == 8);
+        }
+
+        public virtual void RemoveTile(Vector3Int position)
+        {
+            Tilemap.SetTile(position, null);
+        }
+
+        public void ForEachPosition(Action<Vector3Int> callback)
+        {
+            MapSize.ForEachPosition(callback);
+        }
+
+        public float GetFilledRate()
+        {
+            int tileCount = Tilemap.GetTilesRangeCount(new(0, 0), new(MapSize.Width, MapSize.Height));
+            Debug.Log(tileCount / (float)MapSize.Area);
+            return tileCount / (float)MapSize.Area;
+        }
+        #endregion
     }
+
+
 }

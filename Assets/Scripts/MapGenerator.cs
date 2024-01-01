@@ -1,4 +1,6 @@
+using Assets.Scripts.Utils;
 using NaughtyAttributes;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,30 +23,45 @@ namespace CuteNewtTest.MapGeneration
 
         void GenerateLayers()
         {
-            AMapLayer currentBase = null;
             int sortingOrder = 0;
-            foreach (HeightLevelData heightLevel in _heightLevels)
+
+            TerrainLayer currentBase = GenerateTerrain(_heightLevels[0].BaseLayer, null, sortingOrder++);
+
+            for (int i = 0; i < _heightLevels.Count; i++)
             {
-                currentBase = GenerateMap(heightLevel.BaseLayer, currentBase, sortingOrder);
-                sortingOrder++;
-                foreach (MapLayerData layerData in heightLevel.DetailsLayers)
+                HeightLevelData currentLevel = _heightLevels[i];
+
+                foreach (TerrainLayerConfiguration layerData in currentLevel.DetailsLayers)
                 {
-                    GenerateMap(layerData, currentBase, sortingOrder);
-                    sortingOrder++;
+                    GenerateTerrain(layerData, currentBase, sortingOrder++);
                 }
+
+                var nextLevel = _heightLevels.GetElement(i + 1);
+                var nextBase = nextLevel != null? GenerateTerrain(nextLevel.BaseLayer, currentBase, sortingOrder) : null;
+
+                GenerateProps(currentLevel.PropsConfiguration, currentBase, nextBase, sortingOrder++);
+
+
+                currentBase = nextBase;
+
             }
         }
 
-        AMapLayer GenerateMap(MapLayerData mapLayerData, AMapLayer baseLayer, int sortingOrder)
+        private void GenerateProps(PropsLayerConfiguration configuration, TerrainLayer baseLayer, TerrainLayer aboveLayer, int sortingOrder)
         {
-            if (!mapLayerData.Active)
-                return null;
-            
-            AMapLayer mapLayer = CreateMapLayer(mapLayerData, baseLayer);
-            mapLayer.CreateTilemap(_tilemapParent, sortingOrder);
-            mapLayer.GenerateMap();
-            _layers.Add(mapLayer);
-            return mapLayer;
+            if (configuration == null)
+                return;
+            PropsLayer layer = new(configuration, _size, baseLayer, aboveLayer);
+            layer.Generate(_tilemapParent, sortingOrder);
+            _layers.Add(layer);
+        }
+
+        TerrainLayer GenerateTerrain(TerrainLayerConfiguration configuration, TerrainLayer baseLayer, int sortingOrder)
+        {
+            TerrainLayer layer = new(configuration, _size, baseLayer);
+            layer.Generate(_tilemapParent, sortingOrder);
+            _layers.Add(layer);
+            return layer;
         }
 
         void ClearMap()
@@ -57,16 +74,6 @@ namespace CuteNewtTest.MapGeneration
                 GameObject child = _tilemapParent.GetChild(i).gameObject;
                 DestroyImmediate(child);
             }
-        }
-
-        AMapLayer CreateMapLayer(MapLayerData mapLayerData, AMapLayer baseLayer)
-        {
-            return (mapLayerData.UseCellularAutomaton, mapLayerData.UseCascade) switch
-            {
-                (true, false) => new CellularAutomatonLayer(mapLayerData, _size, baseLayer),
-                (true, true) => new CascadeMapLayer(mapLayerData,  _size, baseLayer),
-                _ => new CompleteLayer(mapLayerData, _size, baseLayer)
-            }; ;
         }
     }
 }

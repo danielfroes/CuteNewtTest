@@ -14,17 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _active: 1
   _tile: {fileID: 11400000, guid: 69d0c2fc768098148a86ad8cfbd34dad, type: 2}
-  _layerId: 1841499099
-  _orderInLayer: 0
-  _useCellularAutomaton: 1
-  _cellularAutomatonSettings:
-    _deathLimit: 2
-    _birthLimit: 4
-    _trimLimit: 3
-    _randomGeneratorChance: 28
-    _fillHoles: 1
-    _fillLimit: 4
-  _useCascade: 1
-  _cascadeSettings:
-    _cascadeTile: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
+  _strategy:
+    rid: 6531464142905409556
+  _hasWall: 1
+  _wallSettings:
+    _wall: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
     _height: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6531464142905409556
+      type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
+      data:
+        _clustersSize: 5
+        _clustersFrequency: 1
+        _fillHoles: 1
+        _showRawSettings: 0
+        _settings:
+          DeathThreshold: 2
+          BirthThreshold: 5
+          TrimThreshold: 3
+          RandomGeneratorChance: 0.4
+          FillHoles: 1
+          FillThreshold: 4

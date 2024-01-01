@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _active: 1
   _tile: {fileID: 11400000, guid: 69d0c2fc768098148a86ad8cfbd34dad, type: 2}
-  _layerId: -1782667373
-  _orderInLayer: 0
+  _strategy:
+    rid: 6531464142905409558
   _useCellularAutomaton: 1
   _cellularAutomatonSettings:
     _deathLimit: 2
@@ -28,3 +28,15 @@ MonoBehaviour:
   _cascadeSettings:
     _cascadeTile: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
     _height: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 6531464142905409558
+      type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
+      data:
+        _deathLimit: 2
+        _birthLimit: 5
+        _trimLimit: 3
+        _randomGeneratorChance: 41
+        _fillHoles: 1
+        _fillLimit: 4

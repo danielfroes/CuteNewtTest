@@ -9,7 +9,7 @@ namespace CuteNewtTest.MapGeneration
     {
         public int Width;
         public int Height;
-
+        public int Area => Width * Height;
 
         public void ForEachPosition(Action<Vector3Int> callback, IterationDirection direction = IterationDirection.Down, bool randomStartingPosition = false)
         {

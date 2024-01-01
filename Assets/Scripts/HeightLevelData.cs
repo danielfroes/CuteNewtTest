@@ -9,10 +9,12 @@ namespace CuteNewtTest.MapGeneration
     [Serializable]
     public class HeightLevelData 
     {
-        [SerializeField] MapLayerData _baseLayer;
-        [Expandable, SerializeField] List<MapLayerData> _detailsLayers;
+        [Expandable, SerializeField] TerrainLayerConfiguration _baseLayer;
+        [Expandable, SerializeField] List<TerrainLayerConfiguration> _detailsLayers;
+        [Expandable, SerializeField] PropsLayerConfiguration _propsConfiguration;
 
-        public MapLayerData BaseLayer => _baseLayer;
-        public IReadOnlyList<MapLayerData> DetailsLayers => _detailsLayers;
+        public TerrainLayerConfiguration BaseLayer => _baseLayer;
+        public IReadOnlyList<TerrainLayerConfiguration> DetailsLayers => _detailsLayers;
+        public PropsLayerConfiguration PropsConfiguration => _propsConfiguration;
     }
 }

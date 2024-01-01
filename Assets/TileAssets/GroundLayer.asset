@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _active: 1
   _tile: {fileID: 11400000, guid: 2c505dc5eea9a144d934a2aa212b1ca7, type: 2}
-  _layerId: -953392353
-  _orderInLayer: 0
+  _strategy:
+    rid: 6531464142905409537
   _useCellularAutomaton: 0
   _cellularAutomatonSettings:
     _deathLimit: 2
@@ -28,3 +28,8 @@ MonoBehaviour:
   _cascadeSettings:
     _cascadeTile: {fileID: 0}
     _height: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6531464142905409537
+      type: {class: FillAllMapStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
