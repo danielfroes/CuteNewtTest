@@ -18,7 +18,9 @@ MonoBehaviour:
     rid: 6531464142905409561
   _hasWall: 0
   _wallSettings:
-    _wall: {fileID: 0}
+    _middleWall: {fileID: 0}
+    _rightWall: {fileID: 0}
+    _leftWall: {fileID: 0}
     _height: 0
   references:
     version: 2
@@ -26,16 +28,16 @@ MonoBehaviour:
     - rid: 6531464142905409561
       type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
       data:
-        _clustersSize: 5
-        _clustersFrequency: 1
-        _fillHoles: 0
+        _clustersSize: 4
+        _clustersFrequency: 2
+        _fillHoles: 1
         _trimLeftovers: 1
-        _showRawSettings: 1
+        _showRawSettings: 0
         _settings:
-          DeathThreshold: 2
+          DeathThreshold: 1
           BirthThreshold: 5
           TrimLeftovers: 1
           TrimThreshold: 3
-          RandomGeneratorChance: 0.5
-          FillHoles: 0
-          FillThreshold: 3
+          RandomGeneratorChance: 0.38
+          FillHoles: 1
+          FillThreshold: 4

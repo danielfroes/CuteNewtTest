@@ -28,7 +28,7 @@ MonoBehaviour:
     - rid: 6531464142905409556
       type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
       data:
-        _clustersSize: 5
+        _clustersSize: 6
         _clustersFrequency: 1
         _fillHoles: 1
         _trimLeftovers: 1
@@ -38,6 +38,6 @@ MonoBehaviour:
           BirthThreshold: 5
           TrimLeftovers: 1
           TrimThreshold: 3
-          RandomGeneratorChance: 0.4
+          RandomGeneratorChance: 0.42000002
           FillHoles: 1
           FillThreshold: 4
