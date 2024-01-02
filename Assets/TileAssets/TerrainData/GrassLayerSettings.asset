@@ -10,33 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
-  m_Name: DarkGrassLayerSettings
+  m_Name: GrassLayerSettings
   m_EditorClassIdentifier: 
   _active: 1
-  _tile: {fileID: 11400000, guid: ace54774a10abc649ab9a84e72e3edc0, type: 2}
+  _tile: {fileID: 11400000, guid: ccb578eafd0362d43a96039d76177bbb, type: 2}
   _strategy:
-    rid: 6531464142905409561
-  _useCellularAutomaton: 1
-  _cellularAutomatonSettings:
-    _deathLimit: 1
-    _birthLimit: 5
-    _trimLimit: 3
-    _randomGeneratorChance: 41
-    _fillHoles: 0
-    _fillLimit: 4
-  _useCascade: 0
-  _cascadeSettings:
-    _cascadeTile: {fileID: 0}
+    rid: 6531464142905409575
+  _hasWall: 0
+  _wallSettings:
+    _wall: {fileID: 0}
     _height: 0
   references:
     version: 2
     RefIds:
-    - rid: 6531464142905409561
+    - rid: 6531464142905409575
       type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
       data:
-        _deathLimit: 1
-        _birthLimit: 5
-        _trimLimit: 3
-        _randomGeneratorChance: 41
-        _fillHoles: 0
-        _fillLimit: 4
+        _clustersSize: 6
+        _clustersFrequency: 1
+        _fillHoles: 1
+        _trimLeftovers: 1
+        _showRawSettings: 0
+        _settings:
+          DeathThreshold: 2
+          BirthThreshold: 5
+          TrimLeftovers: 1
+          TrimThreshold: 3
+          RandomGeneratorChance: 0.42000002
+          FillHoles: 1
+          FillThreshold: 4

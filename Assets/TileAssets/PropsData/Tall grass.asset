@@ -9,31 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
-  m_Name: GrassLayerSettings
+  m_Script: {fileID: 11500000, guid: b7eb66c5be6a4f841ab03f441a3ede0e, type: 3}
+  m_Name: Tall grass
   m_EditorClassIdentifier: 
-  _active: 1
-  _tile: {fileID: 11400000, guid: ccb578eafd0362d43a96039d76177bbb, type: 2}
+  _propTile: {fileID: 11400000, guid: f3ecb9734142e874a9d1baa959c84704, type: 2}
+  _offsetToAboveLayerTiles: {x: 0, y: 0}
   _strategy:
-    rid: 6531464142905409575
-  _hasWall: 0
-  _wallSettings:
-    _wall: {fileID: 0}
-    _height: 0
+    rid: 6531464146229919758
   references:
     version: 2
     RefIds:
-    - rid: 6531464142905409575
+    - rid: 6531464146229919758
       type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
       data:
-        _clustersSize: 6
-        _clustersFrequency: 1
-        _fillHoles: 1
+        _clustersSize: 3
+        _clustersFrequency: 3
+        _fillHoles: 0
+        _trimLeftovers: 1
         _showRawSettings: 0
         _settings:
-          DeathThreshold: 2
+          DeathThreshold: 0
           BirthThreshold: 5
+          TrimLeftovers: 1
           TrimThreshold: 3
-          RandomGeneratorChance: 0.42000002
-          FillHoles: 1
+          RandomGeneratorChance: 0.35500002
+          FillHoles: 0
           FillThreshold: 4

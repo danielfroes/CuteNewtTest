@@ -29,10 +29,14 @@ namespace CuteNewtTest.MapGeneration
     [Serializable]
     public class WallSettings
     {
-        [SerializeField] TileBase _wall;
+        [SerializeField] TileBase _middleWall;
+        [SerializeField] TileBase _rightWall;
+        [SerializeField] TileBase _leftWall;
 
         [Range(0, 6), SerializeField] int _height;
-        public TileBase Tile => _wall;
+        public TileBase MiddleWall => _middleWall;
+        public TileBase LeftWall => _leftWall;
+        public TileBase RightWall => _rightWall;
         public int Height => _height;
     }
 

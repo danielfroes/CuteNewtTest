@@ -20,8 +20,7 @@ namespace CuteNewtTest.MapGeneration.Strategies
 
         bool CheckMinimunOffset(Vector3Int position, AMapLayer map)
         {
-            return map.GetTileCountInNeighbours(position, new(2,2)) == 0;
-
+            return map.GetTileCountInNeighbours(position, new Vector2Int(2,2)) == 0;
         }
 
         public bool CheckForSpawnChance()

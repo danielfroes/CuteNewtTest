@@ -11,10 +11,10 @@ namespace CuteNewtTest.MapGeneration
     {
         [Expandable, SerializeField] TerrainLayerConfiguration _baseLayer;
         [Expandable, SerializeField] List<TerrainLayerConfiguration> _detailsLayers;
-        [Expandable, SerializeField] PropsLayerConfiguration _propsConfiguration;
+        [Expandable, SerializeField] List<PropsConfiguration> _propsConfigurations;
 
         public TerrainLayerConfiguration BaseLayer => _baseLayer;
         public IReadOnlyList<TerrainLayerConfiguration> DetailsLayers => _detailsLayers;
-        public PropsLayerConfiguration PropsConfiguration => _propsConfiguration;
+        public IReadOnlyList<PropsConfiguration> Props => _propsConfigurations;
     }
 }

@@ -57,9 +57,9 @@ namespace CuteNewtTest.MapGeneration
         }
 
 
-        public int GetTileCountInNeighbours(Vector3Int position) => GetTileCountInNeighbours(position, Vector2Int.one);
+        public int GetTileCountInNeighbours(Vector3Int position, bool filterOnlyMainTile = true) => GetTileCountInNeighbours(position, Vector2Int.one, filterOnlyMainTile);
 
-        public int GetTileCountInNeighbours(Vector3Int position, Vector2Int offset)
+        public int GetTileCountInNeighbours(Vector3Int position, Vector2Int offset, bool filterOnlyMainTile = true)
         {
             int count = 0;
 
@@ -69,7 +69,8 @@ namespace CuteNewtTest.MapGeneration
                 {
                     Vector3Int neighbourPosition = new(x, y);
 
-                    if (neighbourPosition != position && IsMainTile(neighbourPosition))
+                    if (neighbourPosition != position &&
+                        (filterOnlyMainTile ? IsMainTile(neighbourPosition) : !IsTileEmpty(neighbourPosition)))
                         count++;
                 }
             }

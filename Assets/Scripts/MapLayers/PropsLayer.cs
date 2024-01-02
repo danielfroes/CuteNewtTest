@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,27 +7,27 @@ namespace CuteNewtTest.MapGeneration
 {
     public class PropsLayer : AMapLayer
     {
-        protected override TileBase MainTile => _activeProps.PropTile;
+        protected override TileBase MainTile => _activeProp.PropTile;
         protected override string TilemapName => $"{BaseLayer.Tilemap.name}-Props";
 
         TerrainLayer _aboveLayer;
-        PropsLayerConfiguration _configuration;
+        IReadOnlyList<PropsConfiguration> _propsConfigurations;
 
-        PropsData _activeProps;
+        PropsConfiguration _activeProp;
 
-        public PropsLayer(PropsLayerConfiguration configuration, MapSize mapSize, TerrainLayer baseLayer, TerrainLayer aboveLayer) : base(mapSize, baseLayer)
+        public PropsLayer(IReadOnlyList<PropsConfiguration> props, MapSize mapSize, TerrainLayer baseLayer, TerrainLayer aboveLayer) : base(mapSize, baseLayer)
         {
             _aboveLayer = aboveLayer;
-            _configuration = configuration;
+            _propsConfigurations = props;
         }
 
         public override void Generate(Transform tilemapParent, int sortingOrder)
         {
             Tilemap = CreateTilemap(tilemapParent, sortingOrder);
-            foreach(PropsData props in _configuration.PropsConfigurations)
+            foreach(PropsConfiguration prop in _propsConfigurations)
             {
-                _activeProps = props;
-                props.Strategy.GenerateMap(this);
+                _activeProp = prop;
+                prop.Strategy.GenerateMap(this);
             }
         }
 
@@ -43,7 +44,7 @@ namespace CuteNewtTest.MapGeneration
         {
             return _aboveLayer == null ||
                 (_aboveLayer.IsTileEmpty(position) &&
-                _aboveLayer.GetTileCountInNeighbours(position, _activeProps.OffsetToAboveLayerTiles) == 0);
+                _aboveLayer.GetTileCountInNeighbours(position, _activeProp.OffsetToAboveLayerTiles, false) == 0);
         }
 
         public override void RemoveTile(Vector3Int position)

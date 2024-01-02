@@ -9,31 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
-  m_Name: CliffLayerSettings
+  m_Script: {fileID: 11500000, guid: b7eb66c5be6a4f841ab03f441a3ede0e, type: 3}
+  m_Name: Bush
   m_EditorClassIdentifier: 
-  _active: 1
-  _tile: {fileID: 11400000, guid: 69d0c2fc768098148a86ad8cfbd34dad, type: 2}
+  _propTile: {fileID: 11400000, guid: b5f3b0b01e633d54a8c3338340894f11, type: 2}
+  _offsetToAboveLayerTiles: {x: 0, y: 0}
   _strategy:
-    rid: 6531464142905409556
-  _hasWall: 1
-  _wallSettings:
-    _wall: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
-    _height: 2
+    rid: 6531464146229919757
   references:
     version: 2
     RefIds:
-    - rid: 6531464142905409556
+    - rid: 6531464146229919757
       type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
       data:
         _clustersSize: 5
         _clustersFrequency: 1
-        _fillHoles: 1
-        _showRawSettings: 0
+        _fillHoles: 0
+        _trimLeftovers: 0
+        _showRawSettings: 1
         _settings:
-          DeathThreshold: 2
+          DeathThreshold: 0
           BirthThreshold: 5
+          TrimLeftovers: 0
           TrimThreshold: 3
-          RandomGeneratorChance: 0.4
-          FillHoles: 1
+          RandomGeneratorChance: 0.035
+          FillHoles: 0
           FillThreshold: 4

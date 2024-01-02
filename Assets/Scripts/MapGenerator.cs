@@ -39,7 +39,7 @@ namespace CuteNewtTest.MapGeneration
                 var nextLevel = _heightLevels.GetElement(i + 1);
                 var nextBase = nextLevel != null? GenerateTerrain(nextLevel.BaseLayer, currentBase, sortingOrder) : null;
 
-                GenerateProps(currentLevel.PropsConfiguration, currentBase, nextBase, sortingOrder++);
+                GenerateProps(currentLevel.Props, currentBase, nextBase, sortingOrder++);
 
 
                 currentBase = nextBase;
@@ -47,11 +47,9 @@ namespace CuteNewtTest.MapGeneration
             }
         }
 
-        private void GenerateProps(PropsLayerConfiguration configuration, TerrainLayer baseLayer, TerrainLayer aboveLayer, int sortingOrder)
+        private void GenerateProps(IReadOnlyList<PropsConfiguration> props, TerrainLayer baseLayer, TerrainLayer aboveLayer, int sortingOrder)
         {
-            if (configuration == null)
-                return;
-            PropsLayer layer = new(configuration, _size, baseLayer, aboveLayer);
+            PropsLayer layer = new(props, _size, baseLayer, aboveLayer);
             layer.Generate(_tilemapParent, sortingOrder);
             _layers.Add(layer);
         }
