@@ -1,77 +1,74 @@
-using Assets.Scripts.Utils;
+using CuteNewtTest.Utils;
 using NaughtyAttributes;
-
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace CuteNewtTest.MapGeneration
 {
-    public class MapGenerator : MonoBehaviour
+    public class MapGenerator : MonoBehaviour, IHeightResolver
     {
-        [SerializeField] Transform _tilemapParent;
-        [SerializeField] List<HeightLevelData> _heightLevels = new();
-        [SerializeField] MapSize _size;
+        [SerializeField] MapData _mapData;
+        [SerializeField] List<HeightLevelConfiguration> _heightLevelsData;
 
-        List<AMapLayer> _layers = new();
+        List<HeightLevel> _heightLevels = new();
 
         [Button()]
-        void GenerateMap()
+        public void GenerateMap()
         {
-            ClearMap();
-            GenerateLayers();
+            ClearPreviousMap();
+            GenerateLevels();
         }
 
-        void GenerateLayers()
+        void GenerateLevels()
         {
-            int sortingOrder = 0;
+            HeightLevel currentLevel = CreateHeightLevel(0, null);
 
-            TerrainLayer currentBase = GenerateTerrain(_heightLevels[0].BaseLayer, null, sortingOrder++);
-
-            for (int i = 0; i < _heightLevels.Count; i++)
+            for (int i = 1; i < _heightLevelsData.Count + 1; i++)
             {
-                HeightLevelData currentLevel = _heightLevels[i];
+                _heightLevels.Add(currentLevel);
 
-                foreach (TerrainLayerConfiguration layerData in currentLevel.DetailsLayers)
-                {
-                    GenerateTerrain(layerData, currentBase, sortingOrder++);
-                }
-
-                var nextLevel = _heightLevels.GetElement(i + 1);
-                var nextBase = nextLevel != null? GenerateTerrain(nextLevel.BaseLayer, currentBase, sortingOrder) : null;
-
-                GenerateProps(currentLevel.Props, currentBase, nextBase, sortingOrder++);
-
-
-                currentBase = nextBase;
-
+                HeightLevel levelAbove = CreateHeightLevel(i, currentLevel);
+                currentLevel.CreateProps(levelAbove?.Ground);
+                
+                currentLevel = levelAbove;
             }
         }
 
-        private void GenerateProps(IReadOnlyList<PropsConfiguration> props, TerrainLayer baseLayer, TerrainLayer aboveLayer, int sortingOrder)
+        HeightLevel CreateHeightLevel(int heightIndex, HeightLevel baseHeightLevel)
         {
-            PropsLayer layer = new(props, _size, baseLayer, aboveLayer);
-            layer.Generate(_tilemapParent, sortingOrder);
-            _layers.Add(layer);
+            if (!_heightLevelsData.TryGetElement(heightIndex, out HeightLevelConfiguration data))
+                return null;
+
+            HeightLevel level = new(data, _mapData, heightIndex);
+            level.Generate(baseHeightLevel?.Ground);
+
+            return level;
         }
 
-        TerrainLayer GenerateTerrain(TerrainLayerConfiguration configuration, TerrainLayer baseLayer, int sortingOrder)
+        void ClearPreviousMap()
         {
-            TerrainLayer layer = new(configuration, _size, baseLayer);
-            layer.Generate(_tilemapParent, sortingOrder);
-            _layers.Add(layer);
-            return layer;
-        }
+            _heightLevels.ForEach(layer => layer?.Dispose());
+            _heightLevels.Clear();
 
-        void ClearMap()
-        {
-            _layers.ForEach(layer => layer?.Dispose());
-            _layers.Clear();
-
-            for (int i = _tilemapParent.childCount - 1; i >= 0; i--)
+            for (int i = _mapData.TilemapParent.childCount - 1; i >= 0; i--)
             {
-                GameObject child = _tilemapParent.GetChild(i).gameObject;
+                GameObject child = _mapData.TilemapParent.GetChild(i).gameObject;
                 DestroyImmediate(child);
             }
+        }
+
+        public int GetHeightIndexInPosition(Vector3 position)
+        {
+            for (int i = _heightLevels.Count - 1; i >= 0; i--)
+            {
+                HeightLevel level = _heightLevels[i];
+                if (level.HasTile(position))
+                {
+                    return level.HeightIndex;
+                }
+            }
+
+            return 0;
         }
     }
 }

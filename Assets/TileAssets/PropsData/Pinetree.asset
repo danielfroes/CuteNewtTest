@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7eb66c5be6a4f841ab03f441a3ede0e, type: 3}
   m_Name: Pinetree
   m_EditorClassIdentifier: 
-  _propTile: {fileID: 11400000, guid: 959c789e06580f04d9450b730c19a848, type: 2}
+  _propTile: {fileID: 11400000, guid: cce4b4d97c1d75045bda4a59ca1d4dbb, type: 2}
   _offsetToAboveLayerTiles: {x: 1, y: 0}
   _strategy:
     rid: 6531464146229919756

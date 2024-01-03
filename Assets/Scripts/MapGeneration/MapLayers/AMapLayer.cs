@@ -6,24 +6,29 @@ namespace CuteNewtTest.MapGeneration
 {
     public abstract class AMapLayer : IDisposable
     {
-        public Tilemap Tilemap { get; protected set; }
-        public MapSize MapSize { get; }
+        public abstract string TilemapName { get; }
         public TerrainLayer BaseLayer { get; }
-        
+        public Tilemap Tilemap { get; private set; }
         protected abstract TileBase MainTile { get; }
-        protected abstract string TilemapName { get; } 
+        protected MapSize MapSize { get; private set; }
 
-        public AMapLayer(MapSize mapSize, TerrainLayer baseLayer)
+        public AMapLayer(TerrainLayer baseLayer)
         {
-            MapSize = mapSize;
             BaseLayer = baseLayer;
         }
 
-        public abstract void Generate(Transform tilemapParent, int sortingOrder);
-
-        protected Tilemap CreateTilemap(Transform tilemapParent, int sortingOrder)
+        public void Generate(MapData mapData, int sortingOrder)
         {
-            TilemapRenderer renderer = new GameObject(TilemapName, typeof(TilemapRenderer)).GetComponent<TilemapRenderer>();
+            MapSize = mapData.MapSize;
+            Tilemap = CreateTilemap(mapData.TilemapParent, sortingOrder);
+            Generate();
+        }
+
+        protected abstract void Generate();
+
+        protected virtual Tilemap CreateTilemap(Transform tilemapParent, int sortingOrder)
+        {
+            TilemapRenderer renderer = new GameObject(TilemapName, typeof(TilemapRenderer), typeof(TilemapCollider2D)).GetComponent<TilemapRenderer>();
             renderer.transform.parent = tilemapParent;
             renderer.sortingOrder = sortingOrder;
             renderer.mode = TilemapRenderer.Mode.Individual;
@@ -55,7 +60,6 @@ namespace CuteNewtTest.MapGeneration
         {
             return Tilemap.GetTile(position) == null;
         }
-
 
         public int GetTileCountInNeighbours(Vector3Int position, bool filterOnlyMainTile = true) => GetTileCountInNeighbours(position, Vector2Int.one, filterOnlyMainTile);
 
@@ -109,6 +113,8 @@ namespace CuteNewtTest.MapGeneration
         }
         #endregion
     }
+
+
 
 
 }

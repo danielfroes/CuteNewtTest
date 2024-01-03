@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
   m_Name: CliffLayerSettings
   m_EditorClassIdentifier: 
-  _active: 1
   _tile: {fileID: 11400000, guid: 69d0c2fc768098148a86ad8cfbd34dad, type: 2}
   _strategy:
     rid: 6531464142905409556
   _hasWall: 1
   _wallSettings:
     _middleWall: {fileID: 11400000, guid: f9a4a9c20f3dedf458e66b45c4b9357e, type: 2}
-    _rightWall: {fileID: 11400000, guid: 9a51838a6d21f6e42a2bb7bf52cb1221, type: 2}
-    _leftWall: {fileID: 11400000, guid: e0eb627bdb2b54b4781322bfbc6daa25, type: 2}
+    _rightWall: {fileID: 11400000, guid: 2e80e51ff4b19c94fbf72c48649e410d, type: 2}
+    _leftWall: {fileID: 11400000, guid: ed5e44d71df78084091db5df27fa1cfd, type: 2}
     _height: 2
   references:
     version: 2

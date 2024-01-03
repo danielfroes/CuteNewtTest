@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,23 +6,22 @@ namespace CuteNewtTest.MapGeneration
 {
     public class PropsLayer : AMapLayer
     {
+        public override string TilemapName => $"{BaseLayer.TilemapName}-Props";
         protected override TileBase MainTile => _activeProp.PropTile;
-        protected override string TilemapName => $"{BaseLayer.Tilemap.name}-Props";
 
         TerrainLayer _aboveLayer;
         IReadOnlyList<PropsConfiguration> _propsConfigurations;
 
         PropsConfiguration _activeProp;
 
-        public PropsLayer(IReadOnlyList<PropsConfiguration> props, MapSize mapSize, TerrainLayer baseLayer, TerrainLayer aboveLayer) : base(mapSize, baseLayer)
+        public PropsLayer(IReadOnlyList<PropsConfiguration> props, TerrainLayer baseLayer, TerrainLayer aboveLayer) : base(baseLayer)
         {
             _aboveLayer = aboveLayer;
             _propsConfigurations = props;
         }
 
-        public override void Generate(Transform tilemapParent, int sortingOrder)
+        protected override void Generate()
         {
-            Tilemap = CreateTilemap(tilemapParent, sortingOrder);
             foreach(PropsConfiguration prop in _propsConfigurations)
             {
                 _activeProp = prop;
@@ -37,7 +35,6 @@ namespace CuteNewtTest.MapGeneration
                 return;
 
             base.CreateMainTile(position);
-           
         }
 
         bool CheckAboveLayer(Vector3Int position)

@@ -10,15 +10,13 @@ namespace CuteNewtTest.MapGeneration
 {
 
     [CreateAssetMenu(fileName = "new Terrain", menuName = "Map Generation/Terrain Configurations")]
-    public class TerrainLayerConfiguration : ScriptableObject
+    public class TerrainConfiguration : ScriptableObject
     {
-        [SerializeField] bool _active = true;
         [SerializeField] TileBase _tile;
         [SerializeReference, SerializeReferenceMenu] IMapGenerationStrategy _strategy;
         [SerializeField] bool _hasWall;
         [ShowIf(nameof(_hasWall)), SerializeField] WallSettings _wallSettings;
 
-        public bool Active => _active;
         public TileBase MainTile => _tile;
         public WallSettings WallSettings => _wallSettings;
         public bool HasWall => _hasWall;

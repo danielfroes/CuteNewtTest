@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.Scripts.Utils
+namespace CuteNewtTest.Utils
 {
     public static class ListExtensions
     {
-        public static T GetElement<T>(this IReadOnlyList<T> list, int index)
+        public static T GetElementOrDefault<T>(this IReadOnlyList<T> list, int index)
         {
             bool indexInRange = index >= 0 && index < list.Count;
 

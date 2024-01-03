@@ -1,52 +1,61 @@
 ﻿using UnityEngine.Tilemaps;
 using UnityEngine;
+using CuteNewtTest.Utils;
 
 namespace CuteNewtTest.MapGeneration
 {
     public class TerrainLayer : AMapLayer
     {
-        protected TerrainLayerConfiguration Configuration { get; }
-        protected override TileBase MainTile => Configuration.MainTile;
-        protected override string TilemapName => Configuration.MainTile.name;
+        public override string TilemapName => _configuration.MainTile.name;
+        protected override TileBase MainTile => _configuration.MainTile;
+        
+        WallSettings WallSettings => _configuration.WallSettings;
 
-        WallSettings WallSettings => Configuration.WallSettings;
+        TerrainConfiguration _configuration;
 
-        public TerrainLayer(TerrainLayerConfiguration config, MapSize mapSize, TerrainLayer baseLayer) : base(mapSize, baseLayer)
+        public TerrainLayer(TerrainConfiguration configuration, TerrainLayer baseLayer) : base( baseLayer)
         {
-            Configuration = config;
+            _configuration = configuration;
         }
 
-        public override void Generate(Transform tilemapParent, int sortingOrder)
+        protected override void Generate()
         {
-            if (!Configuration.Active)
-                return;
-
-            Tilemap = CreateTilemap(tilemapParent, sortingOrder);
-            Configuration.GenerationStrategy.GenerateMap(this);
+            _configuration.GenerationStrategy.GenerateMap(this);
             GenerateWalls();
         }
 
+        protected override Tilemap CreateTilemap(Transform tilemapParent, int sortingOrder)
+        {
+            Tilemap tilemap = base.CreateTilemap(tilemapParent, sortingOrder);
+
+            if (_configuration.HasWall)
+                tilemap.gameObject.layer = Constants.WALL_LAYER;
+
+            return tilemap;
+        }
 
         void GenerateWalls()
         {
-            if (!Configuration.HasWall) return;
-
-            WallSettings wallSettings = Configuration.WallSettings;
+            if (!_configuration.HasWall) return;
 
             ForEachPosition(position =>
             {
-                Vector3Int lowerNeighbourPosition = new(position.x, position.y - 1);
-
-                if (!IsMainTile(position) || !IsTileEmpty(lowerNeighbourPosition))
+                if (!IsLowerBorder(position))
                     return;
 
                 CreateWall(position);
             });
         }
 
+        bool IsLowerBorder(Vector3Int position)
+        {
+            Vector3Int lowerNeighbourPosition = new(position.x, position.y - 1);
+            return IsMainTile(position) && IsTileEmpty(lowerNeighbourPosition);
+        }
+
         void CreateWall(Vector3Int borderPosition)
         {
-            TileBase wallTile = GetWallTile(borderPosition);
+            TileBase wallTile = ChooseWallTile(borderPosition);
 
             for (int i = 1; i <= WallSettings.Height; i++)
             {
@@ -54,7 +63,7 @@ namespace CuteNewtTest.MapGeneration
             }
         }
 
-        TileBase GetWallTile(Vector3Int borderPosition)
+        TileBase ChooseWallTile(Vector3Int borderPosition)
         {
             bool hasLeftNeighbour = IsMainTile(borderPosition + Vector3Int.left);
             bool hasRightNeighbour = IsMainTile(borderPosition + Vector3Int.right);
@@ -66,9 +75,10 @@ namespace CuteNewtTest.MapGeneration
                 _ => WallSettings.MiddleWall,
             };
         }
+
+       
     }
 
-    
 
 
 }
