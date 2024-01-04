@@ -31,7 +31,7 @@ namespace CuteNewtTest.MapGeneration
         [SerializeField] TileBase _rightWall;
         [SerializeField] TileBase _leftWall;
 
-        [Range(0, 6), SerializeField] int _height;
+        [Range(0, 3), SerializeField] int _height;
         public TileBase MiddleWall => _middleWall;
         public TileBase LeftWall => _leftWall;
         public TileBase RightWall => _rightWall;

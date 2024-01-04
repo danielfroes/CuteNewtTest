@@ -1,4 +1,5 @@
 ﻿using CuteNewtTest.Utils;
+using System;
 using UnityEngine;
 
 namespace CuteNewtTest.MapGeneration
@@ -10,7 +11,6 @@ namespace CuteNewtTest.MapGeneration
         [SerializeField] SpriteRenderer _renderer;
         [SerializeField] Rigidbody2D _rigidbody;
         [SerializeField] float _offsetToCheckClimb = 0.5f;
-        [SerializeField] LayerMask _layerMask;
 
         IHeightResolver _heightResolver;
 
@@ -86,7 +86,5 @@ namespace CuteNewtTest.MapGeneration
              int height = _heightResolver?.GetHeightIndexInPosition(transform.position) ?? 0;
             _renderer.sortingOrder = SortingOrderUtils.GetHeightLevelSortingOrder(height + 1);
         }
-
-        
     }
 }

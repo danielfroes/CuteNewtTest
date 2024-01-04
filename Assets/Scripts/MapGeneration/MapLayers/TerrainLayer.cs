@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Tilemaps;
 using UnityEngine;
 using CuteNewtTest.Utils;
+using System;
 
 namespace CuteNewtTest.MapGeneration
 {
@@ -32,6 +33,27 @@ namespace CuteNewtTest.MapGeneration
                 tilemap.gameObject.layer = Constants.WALL_LAYER;
 
             return tilemap;
+        }
+
+
+
+        public override void CreateMainTile(Vector3Int position)
+        {
+            if (_configuration.HasWall && !CheckForWallSpace(position))
+                return;
+
+            base.CreateMainTile(position);
+        }
+
+        bool CheckForWallSpace(Vector3Int position)
+        {
+            for (int i = 1; i <= WallSettings.Height + 1; i++)
+            {
+                if(!BaseLayer.IsMainTile(new(position.x, position.y - i)))
+                    return false;
+            }
+
+            return true;
         }
 
         void GenerateWalls()

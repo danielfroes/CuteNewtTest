@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
+  m_Name: DarkGrass2Layer
+  m_EditorClassIdentifier: 
+  _tile: {fileID: 11400000, guid: dd51b3cb2485d6f41882c501af0212db, type: 2}
+  _strategy:
+    rid: 6531464142905409561
+  _hasWall: 0
+  _wallSettings:
+    _middleWall: {fileID: 0}
+    _rightWall: {fileID: 0}
+    _leftWall: {fileID: 0}
+    _height: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6531464142905409561
+      type: {class: CellularAutomatonStrategy, ns: CuteNewtTest.MapGeneration.Strategies, asm: Assembly-CSharp}
+      data:
+        _clustersSize: 5
+        _clustersFrequency: 2
+        _fillHoles: 1
+        _trimLeftovers: 1
+        _enableAdvancedSettings: 0
+        _settings:
+          DeathThreshold: 1
+          BirthThreshold: 5
+          TrimLeftovers: 1
+          TrimThreshold: 3
+          RandomGeneratorChance: 0.4
+          FillHoles: 1
+          FillThreshold: 4

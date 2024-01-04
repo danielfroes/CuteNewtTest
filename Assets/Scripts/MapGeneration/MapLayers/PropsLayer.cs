@@ -31,7 +31,7 @@ namespace CuteNewtTest.MapGeneration
 
         public override void CreateMainTile(Vector3Int position)
         {
-            if (!IsTileEmpty(position) || !CheckAboveLayer(position))
+            if (!CheckProps(position) || !CheckAboveLayer(position))
                 return;
 
             base.CreateMainTile(position);
@@ -42,6 +42,12 @@ namespace CuteNewtTest.MapGeneration
             return _aboveLayer == null ||
                 (_aboveLayer.IsTileEmpty(position) &&
                 _aboveLayer.GetTileCountInNeighbours(position, _activeProp.OffsetToAboveLayerTiles, false) == 0);
+        }
+
+        bool CheckProps(Vector3Int position)
+        {
+            return IsTileEmpty(position) &&
+                    GetTileCountInNeighbours(position, _activeProp.OffsetToAboveLayerTiles, false) == 0;
         }
 
         public override void RemoveTile(Vector3Int position)

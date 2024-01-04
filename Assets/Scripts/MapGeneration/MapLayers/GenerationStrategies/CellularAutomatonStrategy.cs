@@ -8,20 +8,20 @@ namespace CuteNewtTest.MapGeneration.Strategies
     public class CellularAutomatonStrategy : IMapGenerationStrategy
     {
 
-        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_showRawSettings)), AllowNesting, Range(1, 10)]
+        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_enableAdvancedSettings)), AllowNesting, Range(1, 10)]
         int _clustersSize = 5;
 
-        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_showRawSettings)), AllowNesting, Range(1, 3)]
+        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_enableAdvancedSettings)), AllowNesting, Range(1, 3)]
         int _clustersFrequency = 1;
 
-        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_showRawSettings)), AllowNesting] 
+        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_enableAdvancedSettings)), AllowNesting] 
         bool _fillHoles = true;
 
-        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_showRawSettings)), AllowNesting]
+        [SerializeField, OnValueChanged(nameof(UpdateSettings)), DisableIf(nameof(_enableAdvancedSettings)), AllowNesting]
         bool _trimLeftovers = true;
 
-        [SerializeField] bool _showRawSettings;
-        [SerializeField, ShowIf(nameof(_showRawSettings)), AllowNesting] CellularAutomatonSettings _settings;
+        [SerializeField] bool _enableAdvancedSettings;
+        [SerializeField, ShowIf(nameof(_enableAdvancedSettings)), AllowNesting] CellularAutomatonSettings _settings;
 
         
 
@@ -94,7 +94,6 @@ namespace CuteNewtTest.MapGeneration.Strategies
             return map.GetTileCountInNeighbours(position) <= _settings.TrimThreshold || IsCorridor(map, position);
         }
 
-        //TODO: Tentar deixar menos feio;
         bool IsCorridor(AMapLayer map, Vector3Int position)
         {
             bool vertical = map.IsTileEmpty(new(position.x, position.y - 1)) &&
