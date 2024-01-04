@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
-  m_Name: CliffLayerSettings
+  m_Name: Cliff3Layer
   m_EditorClassIdentifier: 
-  _tile: {fileID: 11400000, guid: 69d0c2fc768098148a86ad8cfbd34dad, type: 2}
+  _tile: {fileID: 11400000, guid: 09f11dca9276b4e42ab74ac84d3b2416, type: 2}
   _strategy:
     rid: 6531464142905409556
   _hasWall: 1

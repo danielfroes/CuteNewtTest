@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CuteNewtTest.Utils
 {
@@ -20,6 +21,18 @@ namespace CuteNewtTest.Utils
 
             return indexInRange;
 
+        }
+
+        public static T GetRandom<T>(this IReadOnlyList<T> list)
+        {
+            if(list.Count == 0) return default;
+            int index = Random.Range(0, list.Count);
+            return list[index];
+        }
+
+        public static bool IsNullOrEmpty<T>(this IReadOnlyList<T> list)
+        {
+            return list == null || list.Count == 0;
         }
     }
 }

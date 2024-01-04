@@ -133,14 +133,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 120
+        y: 72
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 5, y: -6}
+        - {x: 5, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: ab43aed5ca0d5cd4eab197ac953574d7
@@ -154,14 +158,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 120
+        y: 72
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: -6}
+        - {x: -12, y: -12}
+        - {x: -5, y: -12}
+        - {x: -5, y: -6}
       tessellationDetail: 0
       bones: []
       spriteID: 125e915dc86cf294ab40ab2cb7a7e97c
@@ -174,15 +182,21 @@ TextureImporter:
       name: dirttiles2_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 48
+        y: 72
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -12}
+        - {x: -5, y: -12}
+        - {x: -5, y: 5}
+        - {x: 12, y: 5}
+        - {x: 12, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: d4be81dcdf4e02a45b8f91ded37587cd
@@ -195,15 +209,19 @@ TextureImporter:
       name: dirttiles2_3
       rect:
         serializedVersion: 2
-        x: 24
-        y: 96
+        x: 72
+        y: 72
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 5}
+        - {x: 12, y: 5}
+        - {x: 12, y: 12}
+        - {x: -12, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: 4bfe143c439218041be99ab1b017786e
@@ -216,15 +234,21 @@ TextureImporter:
       name: dirttiles2_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 96
         y: 72
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 5}
+        - {x: 5, y: 5}
+        - {x: 5, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 12}
+        - {x: -12, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: 8dc1796d851164244bf314f0f09b1a41
@@ -237,15 +261,19 @@ TextureImporter:
       name: dirttiles2_5
       rect:
         serializedVersion: 2
-        x: 24
-        y: 72
+        x: 0
+        y: 48
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 5, y: 12}
+        - {x: 5, y: 6}
+        - {x: 12, y: 6}
+        - {x: 12, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: 11ad5eff35c2f6d43a2ea113c89ac2c9
@@ -258,15 +286,19 @@ TextureImporter:
       name: dirttiles2_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 24
         y: 48
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: 6}
+        - {x: -5, y: 6}
+        - {x: -5, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: b98a54916cfe4ad40b0b64d47023bb93
@@ -279,15 +311,19 @@ TextureImporter:
       name: dirttiles2_7
       rect:
         serializedVersion: 2
-        x: 24
+        x: 48
         y: 48
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -12}
+        - {x: -5, y: -12}
+        - {x: -5, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: f0895994d2a126e4b979ae4e45dc8d9b
@@ -300,15 +336,19 @@ TextureImporter:
       name: dirttiles2_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
+        x: 96
+        y: 48
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 5, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 12}
+        - {x: 5, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: b47af7bfdb00df84bba6e256c915a5a6
@@ -321,12 +361,12 @@ TextureImporter:
       name: dirttiles2_9
       rect:
         serializedVersion: 2
-        x: 24
+        x: 0
         y: 24
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -342,12 +382,12 @@ TextureImporter:
       name: dirttiles2_10
       rect:
         serializedVersion: 2
-        x: 48
+        x: 24
         y: 24
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -363,15 +403,21 @@ TextureImporter:
       name: dirttiles2_11
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 48
+        y: 24
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: -5}
+        - {x: -5, y: -5}
+        - {x: -5, y: 12}
       tessellationDetail: 0
       bones: []
       spriteID: 7b5bb9bb3011f1e41b26b9b28de39560
@@ -384,15 +430,19 @@ TextureImporter:
       name: dirttiles2_12
       rect:
         serializedVersion: 2
-        x: 24
-        y: 0
+        x: 72
+        y: 24
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -12, y: -5}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: -5}
       tessellationDetail: 0
       bones: []
       spriteID: a26b0b2c2e6fbb5499b4cbcc3b0405d4
@@ -405,19 +455,109 @@ TextureImporter:
       name: dirttiles2_13
       rect:
         serializedVersion: 2
-        x: 48
+        x: 96
+        y: 24
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 5, y: -5}
+        - {x: -12, y: -5}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 12}
+        - {x: 5, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412383693a73989438bcdaba2941e711
+      internalID: 742143370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dirttiles2_14
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 412383693a73989438bcdaba2941e711
-      internalID: 742143370
+      spriteID: 5d51999a489b8cf4aac1a07c2d7dc4a8
+      internalID: 124136173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dirttiles2_15
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c2c3e6049a1a948a1811fa1c01c6a5
+      internalID: 1996046943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dirttiles2_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4803d19bcf497ea4ab64f1c57d01e4d5
+      internalID: -2087155651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dirttiles2_17
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f24c22be46ed9d34087509ac443070ea
+      internalID: -1612858149
       vertices: []
       indices: 
       edges: []
@@ -439,13 +579,17 @@ TextureImporter:
       dirttiles2_1: 743285968
       dirttiles2_12: 1261476790
       dirttiles2_6: 1647718902
+      dirttiles2_15: 1996046943
       dirttiles2_10: -17648177
       dirttiles2_9: 266236970
+      dirttiles2_14: 124136173
       dirttiles2_7: -1396613763
+      dirttiles2_16: -2087155651
       dirttiles2_2: 1905881536
       dirttiles2_3: -2078408090
       dirttiles2_4: 833987723
       dirttiles2_11: 1460250781
+      dirttiles2_17: -1612858149
       dirttiles2_0: -470953583
   spritePackingTag: 
   pSDRemoveMatte: 0

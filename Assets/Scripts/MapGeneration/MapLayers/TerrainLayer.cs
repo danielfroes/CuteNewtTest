@@ -75,8 +75,6 @@ namespace CuteNewtTest.MapGeneration
                 _ => WallSettings.MiddleWall,
             };
         }
-
-       
     }
 
 

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0414ff61935dcf9458132f5e7604025c, type: 3}
-  m_Name: DarkGrassLayerSettings
+  m_Name: DarkGrass2Layer
   m_EditorClassIdentifier: 
-  _active: 1
-  _tile: {fileID: 11400000, guid: ace54774a10abc649ab9a84e72e3edc0, type: 2}
+  _tile: {fileID: 11400000, guid: 03671776a536caa4a8770f618f70a7ab, type: 2}
   _strategy:
     rid: 6531464142905409561
   _hasWall: 0
