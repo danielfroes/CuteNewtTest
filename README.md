@@ -22,8 +22,3 @@ Furthermore, you can generate maps during editing time via the Map Generator com
 The main script of the project is the Map Generator, which serves as the top-level abstraction for all procedural generation.
 
 Two other noteworthy scripts are the PlayerController, responsible for player movement, and the MapGenerationDemoController, which serves as the project initializer.
-
-### Notes
-
--   To create more interactive editors without consuming excessive development time, I've added the Naughty Attributes package to the project. 
--   To streamline the development of the project, I've made minor modifications to the tilemap sprites, to be able to treat them all as 24x24-pixel tiles.
